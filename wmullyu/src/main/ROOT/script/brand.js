@@ -1,4 +1,7 @@
 "use strict";
+let itemMode;
+let modeCode;
+const mainSection = document.querySelector('main');
 const brandWrapper = document.querySelector('.brand-wrapper .brand-list-wrapper');
 if(brandWrapper){
 	async function setBrand(brandEle) {
@@ -19,6 +22,14 @@ if(brandWrapper){
 				setHTML += `</section>`;
             }
             brandEle.innerHTML = setHTML;
+            const brandBtn = brandEle.querySelectorAll('.brandSecList');
+            brandBtn.forEach((btns)=>{
+				btns.addEventListener('click', (btn)=>{
+					itemMode = 'brand';
+					modeCode = btn.currentTarget.dataset.code;
+					fetchData()//imgScrollData.js
+				});
+			});
         } catch (error) {
             console.error('Error setting brand:', error);
         }

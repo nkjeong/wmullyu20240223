@@ -61,5 +61,8 @@
 		<script src="/script/brand.js"></script>
 		<script src="/script/itemExposure.js"></script>
 		<script src="/script/search.js"></script>
+		<script src="/script/itemCnt.js"></script>
+		<script src="/script/calendar.js"></script>
+		<script src="/script/imgScrollData.js"></script>
 	</body>
 </html>

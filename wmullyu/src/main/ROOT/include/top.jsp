@@ -207,13 +207,13 @@
 					%>
 							<section class="h-item-wrapper">
 								<section class="h-item-article">
-									<article class="item-all" title="전체상품">All : 700개</article>
-									<article class="item-new" title="최근등록상품">New : 500개</article>
-									<article class="item-soldout" title="품절상품">Sold out : 10개</article>
-									<article class="item-extinction" title="단종상품">Extinction : 50개</article>
+									<article title="전체상품">All : <span class="item-all" data-query="all"></span>개</article>
+									<article title="최근등록상품">New : <span class="item-new" data-query="new"></span>개</article>
+									<article title="품절상품">Sold out : <span class="item-soldout" data-query="outOfStock"></span>개</article>
+									<article title="단종상품">Extinction : <span class="item-extinction" data-query="discontinued"></span>개</article>
 								</section>
 								<section class="h-time-article">
-									<article>2024-02-09 수요일</article>
+									<article class="calendar">2024-02-09 수요일</article>
 								</section>
 							</section>
 					<%	

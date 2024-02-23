@@ -8,4 +8,6 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:out value="${count}" default="Count not set" />
+{
+	"cnt":"<c:out value="${count}" default="Count not set" />"
+}

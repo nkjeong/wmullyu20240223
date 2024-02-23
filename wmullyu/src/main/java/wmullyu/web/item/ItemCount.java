@@ -23,7 +23,7 @@ public class ItemCount {
 		}else if(mode.equals("discontinued")) {
 			sql = "SELECT COUNT(*) AS `cnt` FROM `goods` WHERE `discontinued` = 'Y'";
 		}
-		else if(mode.equals("extinction ")) {
+		else if(mode.equals("outOfStock")) {
 			sql = "SELECT COUNT(*) AS `cnt` FROM `goods` WHERE `outOfStock` = 'Y'";
 		}
 		try {
