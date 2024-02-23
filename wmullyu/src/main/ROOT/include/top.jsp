@@ -115,7 +115,7 @@
 		    </section>
 		    <section class="detail-view-section">
 		    	<section class="detail-view-title">Detail View</section>
-		    	<section class="detail-view-img">sdfg</section>
+		    	<section class="detail-view-img"></section>
 		    </section>
 		  </div>
 		</div>
@@ -207,10 +207,10 @@
 					%>
 							<section class="h-item-wrapper">
 								<section class="h-item-article">
-									<article>All : 700개</article>
-									<article>New : 500개</article>
-									<article>Sold out : 10개</article>
-									<article>Extinction : 50개</article>
+									<article class="item-all" title="전체상품">All : 700개</article>
+									<article class="item-new" title="최근등록상품">New : 500개</article>
+									<article class="item-soldout" title="품절상품">Sold out : 10개</article>
+									<article class="item-extinction" title="단종상품">Extinction : 50개</article>
 								</section>
 								<section class="h-time-article">
 									<article>2024-02-09 수요일</article>
