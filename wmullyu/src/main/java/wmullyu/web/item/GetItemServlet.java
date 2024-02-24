@@ -19,15 +19,15 @@ public class GetItemServlet {
 		String sql = "";
 		if(mode.equals("all")) {
 			
-		}else if(mode.equals("newReg")) {
+		}else if(mode.equals("newReg")) {//메인페이지 최근등록 상품 노출
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"
 					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
 					+ "ORDER BY g.`registrationDate` DESC \r\n"
 					+ "LIMIT 7;";
-		}else if(mode.equals("newReg_more")) {
+		}else if(mode.equals("newReg_more")) {//메인페이지 최근등록 more 상품 노출
 			sql="SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` ORDER BY g.`registrationDate` DESC";
-		}else if(mode.equals("category")) {
+		}else if(mode.equals("category")) {//메인페이지 카테고리 상품 노출
 			GetCategoryRandomCode gcrc = new GetCategoryRandomCode();
 			String code = gcrc.getCategory();
 			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` \r\n"
