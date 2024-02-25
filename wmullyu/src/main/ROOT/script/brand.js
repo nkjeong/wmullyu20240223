@@ -28,6 +28,7 @@ if(brandWrapper){
 					itemMode = 'brand';
 					modeCode = btn.currentTarget.dataset.code;
 					fetchData()//imgScrollData.js
+					scrollData()//imgScrollData.js
 				});
 			});
         } catch (error) {
