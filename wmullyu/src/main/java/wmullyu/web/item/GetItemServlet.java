@@ -12,7 +12,7 @@ import wmullyu.web.category.GetCategoryRandomCode;
 import wmullyu.web.dbConnection.ConnectionDB;
 
 public class GetItemServlet {
-	public Vector<ItemBean> getItemList(String mode){
+	public Vector<ItemBean> getItemList(String mode, String code){
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -29,13 +29,15 @@ public class GetItemServlet {
 			sql="SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` ORDER BY g.`registrationDate` DESC";
 		}else if(mode.equals("category")) {//메인페이지 카테고리 상품 노출
 			GetCategoryRandomCode gcrc = new GetCategoryRandomCode();
-			String code = gcrc.getCategory();
+			String categoryCode = gcrc.getCategory();
 			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` \r\n"
 					+ "FROM `goods` AS g \r\n"
 					+ "LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` \r\n"
-					+ "WHERE g.`category` LIKE '"+code+"%'\r\n"
+					+ "WHERE g.`category` LIKE '"+categoryCode+"%'\r\n"
 					+ "ORDER BY g.`registrationDate` \r\n"
 					+ "LIMIT 7;";
+		}else if(mode.equals("brand")) {
+			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` WHERE `manufacturingCompany_code`='"+code+"' ORDER BY g.`item_name`";
 		}
 		Vector<ItemBean> list = new Vector<ItemBean>();
 		try {

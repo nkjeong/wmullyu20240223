@@ -15,7 +15,7 @@ if (itemExposure.length != 0) {
                 itemName = itemName.length > 25 ? itemName.substring(0, 25) + '...' : itemName;
                 setHTML += `
                     <section class="item-wrapper">
-                        <section class="item-img" data-itemdata='${JSON.stringify(d)}'>
+                        <section class="item-img" data-itemdata="${JSON.stringify(d)}">
                             <img src="https://www.wmullyu.co.kr/images/1000/${imgName}.jpg">
                         </section>
                         <section class="item-name">

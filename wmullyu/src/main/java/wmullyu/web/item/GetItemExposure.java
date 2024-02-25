@@ -17,8 +17,9 @@ public class GetItemExposure extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mode = request.getParameter("mode");
+		String code = request.getParameter("code");
 		GetItemServlet gis = new GetItemServlet();
-		Vector<ItemBean> getList = gis.getItemList(mode);
+		Vector<ItemBean> getList = gis.getItemList(mode, code);
 		ServletContext application =  request.getServletContext();
 		application.setAttribute("getList", getList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/item/itemExposureList.jsp");

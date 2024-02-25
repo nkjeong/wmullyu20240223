@@ -25,10 +25,15 @@ if(brandWrapper){
             const brandBtn = brandEle.querySelectorAll('.brandSecList');
             brandBtn.forEach((btns)=>{
 				btns.addEventListener('click', (btn)=>{
+					const mainLogged = mainSection.querySelector('.mainLogged');
+					mainLogged.style.display='none';
 					itemMode = 'brand';
 					modeCode = btn.currentTarget.dataset.code;
+					const scrollSection = document.querySelector('.scroll-img-data-reset');
+					if(scrollSection){
+						scrollSection.parentNode.removeChild(scrollSection);
+					}
 					fetchData()//imgScrollData.js
-					scrollData()//imgScrollData.js
 				});
 			});
         } catch (error) {
