@@ -16,7 +16,7 @@ if (category) {
                 `;
             });
             categoryEle.innerHTML = setHTML;
-            brand(categoryEle);//brand.js file
+            brand(categoryEle.querySelector('.brand'));//brand.js file
             const categoryFirstList = categoryEle.querySelectorAll('li.category-first-list');
 			setSubCategory(categoryFirstList);
         } catch (error) {

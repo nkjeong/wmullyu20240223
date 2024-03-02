@@ -25,6 +25,8 @@ if(brandWrapper){
             const brandBtn = brandEle.querySelectorAll('.brandSecList');
             brandBtn.forEach((btns)=>{
 				btns.addEventListener('click', (btn)=>{
+					const brandWrapper = document.querySelector('.brand-wrapper');
+					if (brandWrapper) brandWrapper.classList.remove('show');
 					itemMode = 'brand';
 					modeCode = btn.currentTarget.dataset.code;
 					fetchData()//imgScrollData.js
@@ -38,8 +40,7 @@ if(brandWrapper){
     setBrand(brandWrapper);
 }
 
-function brand(brandBtn) {
-    const brand = brandBtn.querySelector('.brand');
+function brand(brand) {//catagory.js 에서 호출
     const brandWrapper = document.querySelector('.brand-wrapper');
     const faXmark = document.querySelector('i.fa-solid.fa-xmark');
 
