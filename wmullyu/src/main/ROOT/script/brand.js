@@ -1,4 +1,5 @@
 "use strict";
+
 let itemMode;
 let modeCode;
 const mainSection = document.querySelector('main');
@@ -27,10 +28,15 @@ if(brandWrapper){
 				btns.addEventListener('click', (btn)=>{
 					const brandWrapper = document.querySelector('.brand-wrapper');
 					if (brandWrapper) brandWrapper.classList.remove('show');
+					const mainLogged = mainSection.querySelector('.mainLogged');
+					mainLogged.style.display='none';
 					itemMode = 'brand';
 					modeCode = btn.currentTarget.dataset.code;
+					const scrollSection = document.querySelector('.scroll-img-data-reset');
+					if(scrollSection){
+						scrollSection.parentNode.removeChild(scrollSection);
+					}
 					fetchData()//imgScrollData.js
-					scrollData()//imgScrollData.js
 				});
 			});
         } catch (error) {

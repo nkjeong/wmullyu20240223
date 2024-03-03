@@ -145,8 +145,14 @@ section.mainLogged > section.item-exposure > section.exposure-section section.ex
 	display: flex;
 	justify-content: space-between;
 }
-.item-exposure > .exposure-section .item-wrapper{
-	
+.item-wrapper-scroll{
+	margin:0 15px;
+}
+.scroll-img-data{
+	flex-wrap: wrap;
+}
+.scroll-img-data-reset{
+	justify-content: flex-start;
 }
 .item-exposure > .exposure-section .item-wrapper > section.item-img{
 	width:170px;
@@ -306,3 +312,4 @@ section.last-message > article{
 .set-img-html .html{
 	color:var(--bs-warning);
 }
+
