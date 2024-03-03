@@ -1,6 +1,8 @@
 "use strict";
 
-async function fetchData() {// 새로운 콘텐츠를 로드하는 로직
+async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
+	const mainLogged = mainSection.querySelector('.mainLogged');
+	mainLogged.style.display='none';
 	// 예: API 호출 등
 	let data;
 	let setHTML = '';
@@ -16,7 +18,7 @@ async function fetchData() {// 새로운 콘텐츠를 로드하는 로직
 					<section class="item-exposure main-layout-width">
 						<section class="exposure-section">
 							<section class="exposure-title">
-								<article><span>최 근 등 록 상 품</span></article>
+								<article><span>${title}</span></article>
 							</section>
 							<section class="exposure-item-wrapper scroll-img-data">
 				`;

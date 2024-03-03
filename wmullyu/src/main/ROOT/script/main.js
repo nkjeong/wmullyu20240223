@@ -29,3 +29,19 @@ function observeElements(selector, animationClass, nextSelector) {
 document.addEventListener('DOMContentLoaded', function() {
     observeElements('.image-banner', 'fade-in-up', '.text-banner');
 });
+
+//데이터불러오기
+const setItemBtns = document.querySelectorAll('.h-item-article > article > span');
+
+
+setItemBtns.forEach((btns)=>{
+	btns.addEventListener('click', (btn)=>{
+		itemMode = btn.currentTarget.dataset.query;
+		modeCode = btn.currentTarget.dataset.query;
+		const scrollSection = document.querySelector('.scroll-img-data-reset');
+		if(scrollSection){
+			scrollSection.parentNode.removeChild(scrollSection);
+		}
+		fetchData(itemMode)//imgScrollData.js
+	});
+});

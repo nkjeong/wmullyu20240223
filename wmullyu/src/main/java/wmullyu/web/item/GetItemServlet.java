@@ -17,8 +17,11 @@ public class GetItemServlet {
 		Connection conn = null;
 		ResultSet rs = null;
 		String sql = "";
-		if(mode.equals("all")) {
-			
+		if(mode.equals("all") && code.equals("all")) {
+			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
+					+ "FROM goods AS g \r\n"
+					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
+					+ "ORDER BY g.`registrationDate` DESC";
 		}else if(mode.equals("newReg")) {//메인페이지 최근등록 상품 노출
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"

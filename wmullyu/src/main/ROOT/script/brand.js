@@ -18,7 +18,7 @@ if(brandWrapper){
 				setHTML += `<section style="width:${sectionInterval}%">`
 				for(let j = brandSectionSize*i ; j < (i+1)*brandSectionSize ; j++){
 					if(brandLength-1 < j)break;
-					setHTML += `<article class="brandSecList" data-code="${data[j].code}">${data[j].nameKor}</article>`;
+					setHTML += `<article class="brandSecList" data-code="${data[j].code}" data-name="${data[j].nameKor}">${data[j].nameKor}</article>`;
 				}
 				setHTML += `</section>`;
             }
@@ -28,15 +28,14 @@ if(brandWrapper){
 				btns.addEventListener('click', (btn)=>{
 					const brandWrapper = document.querySelector('.brand-wrapper');
 					if (brandWrapper) brandWrapper.classList.remove('show');
-					const mainLogged = mainSection.querySelector('.mainLogged');
-					mainLogged.style.display='none';
 					itemMode = 'brand';
 					modeCode = btn.currentTarget.dataset.code;
+					const barndName = btn.currentTarget.dataset.name;
 					const scrollSection = document.querySelector('.scroll-img-data-reset');
 					if(scrollSection){
 						scrollSection.parentNode.removeChild(scrollSection);
 					}
-					fetchData()//imgScrollData.js
+					fetchData(barndName)//imgScrollData.js
 				});
 			});
         } catch (error) {

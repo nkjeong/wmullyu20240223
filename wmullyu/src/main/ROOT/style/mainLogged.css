@@ -122,11 +122,11 @@ li.category-first-list:hover .subCategorySecond{
 section.mainLogged > section.item-exposure{
 }
 
-section.mainLogged > section.item-exposure > section.exposure-section section.exposure-title{
+section.exposure-section section.exposure-title{
 	font-size: 1.2rem;
 	font-weight: 700;
 }
-section.mainLogged > section.item-exposure > section.exposure-section section.exposure-title article{
+section.exposure-section section.exposure-title article{
 	display: flex;
 	justify-content: center;
 	border-bottom:1px solid #dcdcdc;
@@ -313,3 +313,10 @@ section.last-message > article{
 	color:var(--bs-warning);
 }
 
+.h-item-article > article > span{
+	cursor:pointer;
+}
+.h-item-article > article > span:hover{
+	text-decoration: underline;
+	color:var(--bs-warning);
+}
