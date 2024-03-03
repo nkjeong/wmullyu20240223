@@ -146,7 +146,7 @@ section.mainLogged > section.item-exposure > section.exposure-section section.ex
 	justify-content: space-between;
 }
 .item-wrapper-scroll{
-	margin:0 15px;
+	margin:15px 15px;
 }
 .scroll-img-data{
 	flex-wrap: wrap;
