@@ -153,6 +153,7 @@ section.mainLogged > section.item-exposure > section.exposure-section section.ex
 }
 .scroll-img-data-reset{
 	justify-content: flex-start;
+	padding-top: 10px;
 }
 .item-exposure > .exposure-section .item-wrapper > section.item-img{
 	width:170px;

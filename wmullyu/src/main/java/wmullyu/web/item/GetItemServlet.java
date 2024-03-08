@@ -39,19 +39,27 @@ public class GetItemServlet {
 					+ "WHERE g.`category` LIKE '"+categoryCode+"%'\r\n"
 					+ "ORDER BY g.`registrationDate` \r\n"
 					+ "LIMIT 7;";
-		}else if(mode.equals("brand")) {
+		}else if(mode.equals("brand")) {//브랜드 상품
 			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` WHERE `manufacturingCompany_code`='"+code+"' ORDER BY g.`item_name`";
-		}else if(mode.equals("firstCategory") || mode.equals("secondCategory")) {
+		}else if(mode.equals("firstCategory") || mode.equals("secondCategory")) {//카테고리버튼 상품
 			sql = "SELECT g.*, m.nameEng, m.nameKor\r\n"
 					+ "FROM goods AS g \r\n"
 					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
 					+ "WHERE g.`category` LIKE '"+code+"%'\r\n"
 					+ "ORDER BY g.`registrationDate` DESC";
-		}else if(mode.equals("new")) {
+		}else if(mode.equals("new")) {//7일간 새로올린 상품
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"
 					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
 					+ "WHERE g.`registrationDate` >= CURDATE() - INTERVAL 7 DAY \r\n"
+					+ "ORDER BY g.`registrationDate` DESC";
+		}else if(mode.equals("search")) {//검색상품
+			
+		}else if(mode.equals("outOfStock") || mode.equals("discontinued")) {//단종, 품절 상품
+			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
+					+ "FROM goods AS g \r\n"
+					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
+					+ "WHERE g.`"+mode+"` = 'Y' \r\n"
 					+ "ORDER BY g.`registrationDate` DESC";
 		}
 		Vector<ItemBean> list = new Vector<ItemBean>();
