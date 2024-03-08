@@ -6,6 +6,9 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 	// 예: API 호출 등
 	let data;
 	let setHTML = '';
+	if(title === 'all'){
+		title = '전체상품';
+	}
 	try {
 		data = await getFetch(`/item/itemExposureList?mode=${itemMode}&code=${modeCode}`);
 		// 임시로 새 콘텐츠를 페이지에 추가하는 예시

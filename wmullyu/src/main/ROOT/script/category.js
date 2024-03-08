@@ -9,8 +9,8 @@ if (category) {
             setHTML += `<li class="brand">[브랜드]</li>`;
             data.forEach((d) => {
                 setHTML += `
-                    <li class="category-first-list" data-code="${d.code}">
-                        ${d.name}
+                    <li class="category-first-list" data-code="${d.code}" data-name="${d.name}">
+                        <span>${d.name}</span>
                         <section class="subCategorySecond"></section>
                     </li>
                 `;
@@ -19,6 +19,21 @@ if (category) {
             brand(categoryEle.querySelector('.brand'));//brand.js file
             const categoryFirstList = categoryEle.querySelectorAll('li.category-first-list');
 			setSubCategory(categoryFirstList);
+			
+			//1차 카테고리 클릭
+			const category1Btns = categoryEle.querySelectorAll('li.category-first-list > span');
+			category1Btns.forEach((btns)=>{
+				btns.addEventListener('click',(btn)=>{
+					itemMode = 'firstCategory';
+					modeCode = btn.currentTarget.parentNode.dataset.code;
+					const title = btn.currentTarget.parentNode.dataset.name;
+					const scrollSection = document.querySelector('.scroll-img-data-reset');
+					if(scrollSection){
+						scrollSection.parentNode.removeChild(scrollSection);
+					}
+					fetchData(title)//imgScrollData.js
+				});
+			});
         } catch (error) {
             console.error('Error setting category:', error);
         }
