@@ -51,23 +51,29 @@ if (category) {
 			let setHTML = '';
 			for(let j = 0 ; j < data.length ; j++){
 				setHTML += `
-					<section data-code="${data[j].code}">
-						<section class="subCategoryThird"></section>
-						${data[j].name}
+					<section class="category-second-list" data-code="${data[j].code}" data-name="${data[j].name}">
+						<!--<section class="subCategoryThird"></section>-->
+						<span class="secondCategoryBtn">${data[j].name}</span>
 					</section>
 				`;
 			}
 			subCategorySecond.innerHTML = setHTML;
-	/*		const subCategorySecondBtns = subCategorySecond.querySelectorAll('.subCategorySecond > section');
+			const subCategorySecondBtns = subCategorySecond.querySelectorAll('.subCategorySecond > section.category-second-list > span');
 			subCategorySecondBtns.forEach((btns)=>{
 				btns.addEventListener('click', (btn)=>{
 					btn.stopPropagation();
-					let cateFirst = btn.currentTarget.parentNode.parentNode.dataset.code;
-					let cateSecond = btn.currentTarget.dataset.code;
-					let keyword = cateFirst+cateSecond;
-					setItemList ('subCategorySecond', craeteBackBoardComm, keyword);
+					itemMode = 'secondCategory';
+					modeCode = btn.currentTarget.closest('.category-first-list').dataset.code+btn.currentTarget.parentNode.dataset.code;
+					const firstCategoryName = btn.currentTarget.closest('.category-first-list').dataset.name;
+					const secondCategoryName = btn.currentTarget.parentNode.dataset.name;
+					const title = firstCategoryName + ' > ' + secondCategoryName;
+					const scrollSection = document.querySelector('.scroll-img-data-reset');
+					if(scrollSection){
+						scrollSection.parentNode.removeChild(scrollSection);
+					}
+					fetchData(title)//imgScrollData.js
 				}, false);
-			});*/
+			});
 		}
 	}
 }

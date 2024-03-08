@@ -8,6 +8,8 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 	let setHTML = '';
 	if(title === 'all'){
 		title = '전체상품';
+	}else if(title === 'new'){
+		title = '최근등록상품(7일)';
 	}
 	try {
 		data = await getFetch(`/item/itemExposureList?mode=${itemMode}&code=${modeCode}`);

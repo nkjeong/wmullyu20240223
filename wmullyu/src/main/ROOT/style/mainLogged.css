@@ -320,3 +320,6 @@ section.last-message > article{
 	text-decoration: underline;
 	color:var(--bs-warning);
 }
+.secondCategoryBtn{
+	display:block; width:100%; height:100%;
+}
