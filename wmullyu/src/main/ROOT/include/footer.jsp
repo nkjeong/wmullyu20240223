@@ -2,8 +2,15 @@
 		</main>
 		<footer>
 			<section class="last-message">
-				<article>
+				<article class="pagination">
+					<span>1234567890</span>
+				</article>
+				<article class="footer-msg">
 					<span>It is jium Office, which knows your mind the best.</span>
+				</article>
+				<article class="excel-download">
+					<span>전체다운로드</span>
+					<span>검색결과다운로드</span>
 				</article>
 			</section>
 			<section class="footer-wrapper">

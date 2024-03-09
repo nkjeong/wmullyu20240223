@@ -181,14 +181,21 @@ section.mainLogged > section.item-exposure > section.exposure-section section.ex
 	border-radius: 10px;
 }
 section.last-message{
+	display:flex;
 	width:100%;
 }
 section.last-message > article{
 	text-align:center;
 	padding:15px;
 	background-color: var(--bs-dark);
-	width:100%;
 	color:var(--bs-gray-200);
+}
+section.last-message > article.footer-msg{
+	width:40%;
+}
+section.last-message > article.pagination,
+section.last-message > article.excel-download{
+	width:30%;
 }
 .search-form{
 	display: flex;
