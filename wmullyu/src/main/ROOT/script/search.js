@@ -17,3 +17,27 @@ if(searchBtn){
 		ckSearch(searchBtn.closest('.search-form'));
 	});
 }
+
+const getSearchItems = (keyword) => {
+	itemMode = 'search';
+	modeCode = keyword;
+	const title = '검색어 : '+modeCode;
+	const scrollSection = document.querySelector('.scroll-img-data-reset');
+	if(scrollSection){
+		scrollSection.parentNode.removeChild(scrollSection);
+	}
+	if(modeCode !== ''){
+		fetchData(title)//imgScrollData.js
+	}else{
+		location.href='/';
+	}
+}
+
+const searchForm = document.querySelector('.search-form')
+if(searchForm){
+	const keyword = searchForm.search;
+	keyword.focus();
+	keyword.addEventListener('keyup', (keyword)=>{
+		getSearchItems(keyword.target.value);
+	});
+}

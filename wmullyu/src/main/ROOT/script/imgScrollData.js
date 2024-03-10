@@ -3,7 +3,6 @@
 async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 	const mainLogged = mainSection.querySelector('.mainLogged');
 	mainLogged.style.display='none';
-	// 예: API 호출 등
 	let data;
 	let setHTML = '';
 	if(title === 'all'){
@@ -35,16 +34,6 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 			`;
 		}else{
 			data.forEach((d)=>{
-	/*			if(i == 0){
-					setHTML += `
-						<section class="item-exposure main-layout-width">
-							<section class="exposure-section">
-								<section class="exposure-title">
-									<article><span>${title}</span></article>
-								</section>
-								<section class="exposure-item-wrapper scroll-img-data">
-					`;
-				}*/
 	            let imgPre = d.nameEng.toLowerCase();
 	            let imgName = `${imgPre}_${d.code}`;
 	            let itemName = d.item_name_reg;
@@ -63,13 +52,6 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 		            </section>
 	
 				`;
-	/*			if(i+1 == data.length){
-					setHTML += `
-						        </section>
-						    </section>
-						</section>
-					`;
-				}*/
 			});
 		}
 				setHTML += `

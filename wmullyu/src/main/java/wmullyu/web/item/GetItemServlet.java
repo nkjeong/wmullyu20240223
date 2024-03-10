@@ -40,7 +40,7 @@ public class GetItemServlet {
 					+ "ORDER BY g.`registrationDate` \r\n"
 					+ "LIMIT 7;";
 		}else if(mode.equals("brand")) {//브랜드 상품
-			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` WHERE `manufacturingCompany_code`='"+code+"' ORDER BY g.`item_name`";
+			sql = "SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` WHERE g.`manufacturingCompany_code`='"+code+"' ORDER BY g.`item_name`";
 		}else if(mode.equals("firstCategory") || mode.equals("secondCategory")) {//카테고리버튼 상품
 			sql = "SELECT g.*, m.nameEng, m.nameKor\r\n"
 					+ "FROM goods AS g \r\n"
@@ -54,7 +54,25 @@ public class GetItemServlet {
 					+ "WHERE g.`registrationDate` >= CURDATE() - INTERVAL 7 DAY \r\n"
 					+ "ORDER BY g.`registrationDate` DESC";
 		}else if(mode.equals("search")) {//검색상품
-			
+			String [] word = code.trim().split(" ");
+			StringBuilder queryBuilder = new StringBuilder("SELECT * FROM `goods` AS g JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code` = m.`code` WHERE 1=1");
+			for (String w : word) {
+			    queryBuilder.append(" AND g.`item_name` LIKE '%").append(w).append("%'");
+			}
+			sql = queryBuilder.toString();
+			/*
+			  String subQuery = "";
+			  sql = "SELECT g.*, m.`nameEng`, m.`nameKor` FROM `goods` AS g LEFT JOIN `manufacturingcompany` AS m ON g.`manufacturingCompany_code`=m.`code` WHERE g.`item_name` LIKE '%"+word[0]+"%'";
+			  for(int i = 0 ; i < word.length ; i++){
+				  if(i+1 == word.length){
+					  subQuery += " ORDER BY `hit` DESC";
+					  break;
+				  } 
+				  subQuery += " AND `item_name` LIKE '%"+word[i+1]+"%'";
+			  }
+			  sql += subQuery;
+			 */
+            System.out.println(sql);
 		}else if(mode.equals("outOfStock") || mode.equals("discontinued")) {//단종, 품절 상품
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"
