@@ -8,8 +8,18 @@
 					<span>It is jium Office, which knows your mind the best.</span>
 				</article>
 				<article class="excel-download">
-					<span>전체다운로드</span>
-					<span>검색결과다운로드</span>
+					<%
+						if(userId == null){
+					%>
+							로그인 하세요~
+					<%
+						}else{
+					%>
+							<span onclick="downloadExcel('all');">전체다운로드</span>
+							<span onclick="downloadExcel('search-mode');">검색결과다운로드</span>
+					<%	
+						}
+					%>
 				</article>
 			</section>
 			<section class="footer-wrapper">

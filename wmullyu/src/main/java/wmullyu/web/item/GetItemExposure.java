@@ -18,11 +18,15 @@ public class GetItemExposure extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mode = request.getParameter("mode");
 		String code = request.getParameter("code");
+		String excel = request.getParameter("excel");
 		GetItemServlet gis = new GetItemServlet();
 		Vector<ItemBean> getList = gis.getItemList(mode, code);
 		ServletContext application =  request.getServletContext();
 		application.setAttribute("getList", getList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/item/itemExposureList.jsp");
+		if(excel != null && excel.equals("excel")) {
+			dispatcher = request.getRequestDispatcher("/excelDownload/excelDownload.jsp");
+		}
 		dispatcher.forward(request, response);
 	}
 }

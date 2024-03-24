@@ -64,7 +64,7 @@
 				<td>옵션값</td>
 				<td>제조사</td>
 			</tr>
-			<c:forEach var="downloadXls" items="${download}" varStatus="status">
+			<c:forEach var="downloadXls" items="${getList}" varStatus="status">
 				<tr class="contents">
 					<td class="firstEle">${status.index+1}</td>
 					<td style="mso-number-format:'\@'">${downloadXls.code}</td>
@@ -77,8 +77,8 @@
 					<td>${downloadXls.item_unit}</td>
 					<td class="price"><fmt:formatNumber value="${downloadXls.item_retailPrice}" type="number"/></td>
 					<td class="price"><fmt:formatNumber value="${downloadXls.item_purchasePrice}" type="number"/></td>
-					<td class="file">http://twin19.synology.me:8080/images/1000/${fn:toLowerCase(downloadXls.nameEng)}_${downloadXls.code}.jpg</td>
-					<td class="file">&lt;div style="width:100%; text-align:center;"&gt;&lt;img src="http://twin19.synology.me:8080/images/detail/${fn:toLowerCase(downloadXls.nameEng)}_${downloadXls.code}.jpg"&gt;&lt;/div&gt;</td>
+					<td class="file">https://www.wmullyu.co.kr/images/1000/${fn:toLowerCase(downloadXls.nameEng)}_${downloadXls.code}.jpg</td>
+					<td class="file">&lt;div style="width:100%; text-align:center;"&gt;&lt;img src="https://www.wmullyu.co.kr/images/detail/${fn:toLowerCase(downloadXls.nameEng)}_${downloadXls.code}.jpg"&gt;&lt;/div&gt;</td>
 					<td>${downloadXls.notice}</td>
 					<td>${downloadXls.keyword}</td>
 					<td>${downloadXls.category}</td>

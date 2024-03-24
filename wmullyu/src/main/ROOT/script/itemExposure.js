@@ -67,7 +67,11 @@ const printData = (data) =>{
 	const itemStandard = offcanvasElement.querySelector('.item-data-view .item-standard');
 	itemStandard.innerHTML = `${data.item_standard}`;
 	const option = offcanvasElement.querySelector('.item-data-view .option');
-	option.innerHTML = `${data.option}`;
+	if(data.option === 'N'){
+		option.innerHTML = `없음`;
+	}else{
+		getOption(option, data.code, data.manufacturingCompany_code);
+	}
 	const keyword = offcanvasElement.querySelector('.item-data-view .keyword');
 	keyword.innerHTML = `${data.keyword}`;
 	const nameKor = offcanvasElement.querySelector('.item-data-view .name-kor');
@@ -86,4 +90,9 @@ const printData = (data) =>{
 	`;
 	const bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
 	bsOffcanvas.show();
+}
+
+const getOption = async (ele, code, manufacturingCompany_code) => {
+	const data = await getFetch(`/item/getOption?code=${code}&manufacturingCompany_code=${manufacturingCompany_code}`);
+	ele.innerHTML = data.option;
 }

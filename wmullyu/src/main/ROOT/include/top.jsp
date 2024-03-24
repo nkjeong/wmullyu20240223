@@ -142,7 +142,6 @@
 					<%	
 						}
 					%>
-
 					</article>
 				</section>
 				<section class="h-top-right">

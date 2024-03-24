@@ -156,3 +156,15 @@ const showPage = (title, nowPage, nowBlock) => {
 	}
 	fetchData(title, parseInt(nowPage), parseInt(nowBlock));
 }
+
+const downloadExcel = (downloadMode) => {
+	if(downloadMode === 'all'){
+		location.href = `/item/downloadExcel?mode=all&code=all`;
+	}else{
+		if(!itemMode || !modeCode){
+			alert('현재 페이지에서는 전체 데이터만 다운로드 가능합니다.');
+		}else{
+			location.href = `/item/downloadExcel?mode=${itemMode}&code=${modeCode}`;
+		}
+	}
+}

@@ -197,11 +197,13 @@ section.last-message > article.my-pagination,
 section.last-message > article.excel-download{
 	width:30%;
 }
-section.last-message > article.my-pagination > span{
+section.last-message > article.my-pagination > span,
+section.last-message > article.excel-download > span{
 	padding:0 5px;
 	cursor:pointer;
 }
-section.last-message > article.my-pagination > span:hover{
+section.last-message > article.my-pagination > span:hover,
+section.last-message > article.excel-download > span:hover{
 	color:var(--bs-danger);
 	text-decoration: underline;
 }
