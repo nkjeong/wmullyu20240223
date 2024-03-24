@@ -134,7 +134,7 @@
 					<%
 						}else{
 					%>
-							<form class="search-form" name="search-form" onsubmit="return ckSearch(this);">
+							<form class="search-form" name="search-form" onsubmit="return ckSearch(this);" accept-charset="UTF-8">
 								<article>검색</article>
 								<article><input type="text" name="search" class="search"></article>
 								<article><i class="fa-solid fa-magnifying-glass-arrow-right"></i></article>

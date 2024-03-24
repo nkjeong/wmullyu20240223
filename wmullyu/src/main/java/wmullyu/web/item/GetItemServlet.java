@@ -72,7 +72,6 @@ public class GetItemServlet {
 			  }
 			  sql += subQuery;
 			 */
-            System.out.println(sql);
 		}else if(mode.equals("outOfStock") || mode.equals("discontinued")) {//단종, 품절 상품
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"

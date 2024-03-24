@@ -7,6 +7,14 @@ const ckSearch = (form) => {
 		keyword.focus();
 		return false;
 	}else{
+		itemMode = 'search';
+		modeCode = keyword.value;
+		const title = '검색어 : '+modeCode;
+		const scrollSection = document.querySelector('.scroll-img-data-reset');
+		if(scrollSection){
+			scrollSection.parentNode.removeChild(scrollSection);
+		}
+		fetchData(title)//imgScrollData.js
 		return false;
 	}
 }
@@ -18,7 +26,7 @@ if(searchBtn){
 	});
 }
 
-const getSearchItems = (keyword) => {
+/*const getSearchItems = (keyword) => {
 	itemMode = 'search';
 	modeCode = keyword;
 	const title = '검색어 : '+modeCode;
@@ -41,3 +49,4 @@ if(searchForm){
 		getSearchItems(keyword.target.value);
 	});
 }
+*/

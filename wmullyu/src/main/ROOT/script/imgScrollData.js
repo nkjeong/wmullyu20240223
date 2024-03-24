@@ -1,6 +1,6 @@
 "use strict";
 
-async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
+async function fetchData(title, nowPage=0, nowBlock=0) {// 새로운 콘텐츠를 로드하는 로직
 	const mainLogged = mainSection.querySelector('.mainLogged');
 	mainLogged.style.display='none';
 	let data;
@@ -33,7 +33,36 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 				검색된 데이터가 없습니다.
 			`;
 		}else{
-			data.forEach((d)=>{
+			
+			const totalItem = data.length;
+			const pagePerItem = 21;
+			const totalPage = Math.ceil(totalItem/pagePerItem);
+			const blockPerPage = 10;
+			const totalBlock = Math.ceil(totalPage/blockPerPage);
+			for(let i = nowPage*pagePerItem ; i < (nowPage+1)*pagePerItem ; i++){
+				if(i === totalItem)break;
+				let imgPre = data[i].nameEng.toLowerCase();
+				let imgName = `${imgPre}_${data[i].code}`;
+	            let itemName = data[i].item_name_reg;
+	            itemName = itemName.length > 25 ? itemName.substring(0, 25) + '...' : itemName;
+	            setHTML += `
+		            <section class="item-wrapper item-wrapper-scroll">
+		                <section class="item-img" data-itemdata='${JSON.stringify(data[i])}'>
+		                    <img src="https://www.wmullyu.co.kr/images/1000/${imgName}.jpg">
+		                </section>
+		                <section class="item-name">
+		                    ${itemName}
+		                </section>
+		                <section class="item-price">
+		                    <span style="text-decoration:line-through;">${getCurrentMony(data[i].item_retailPrice)}</span> -> <b style="color:#dc3545;">${getCurrentMony(data[i].item_purchasePrice)}</b>
+		                </section>
+		            </section>
+	
+				`;
+			}
+			
+			pagination(title, totalPage, blockPerPage, nowPage, nowBlock, totalBlock);
+			/*data.forEach((d)=>{
 	            let imgPre = d.nameEng.toLowerCase();
 	            let imgName = `${imgPre}_${d.code}`;
 	            let itemName = d.item_name_reg;
@@ -52,7 +81,7 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
 		            </section>
 	
 				`;
-			});
+			});*/
 		}
 				setHTML += `
 					        </section>
@@ -66,10 +95,64 @@ async function fetchData(title) {// 새로운 콘텐츠를 로드하는 로직
         itemBtns.forEach((btns)=>{
 			btns.addEventListener('click',(btn)=>{
 				const data = JSON.parse(btn.currentTarget.dataset.itemdata);
-				printData(data);
+				printData(data);//itemExposure.js
 			});
 		});
 	} catch (error) {
 		console.error('Error setting items:', error);
 	}
+}
+
+const pagination = (title, totalPage, blockPerPage, nowPage, nowBlock, totalBlock) => {
+	const myPaginationWrapper = document.querySelector('.my-pagination');
+	let html = ``;
+	//block
+	if(nowBlock === 0){
+		html += `<span><i class="fa-solid fa-caret-left"></i><i class="fa-solid fa-caret-left"></i></span>`;
+	}else{
+		html += `<span onclick="showPage('${title}', '${(nowBlock-1)*blockPerPage}', '${nowBlock-1}')"><i class="fa-solid fa-caret-left"></i><i class="fa-solid fa-caret-left"></i></span>`;
+	}
+	//page
+	if(nowPage === 0){
+		html += `<span><i class="fa-solid fa-caret-left"></i></span>`;
+	}else{
+		if(nowPage%blockPerPage === 0){
+			html += `<span onclick="showPage('${title}', '${(nowBlock-1)*blockPerPage}', '${nowBlock-1}')"><i class="fa-solid fa-caret-left"></i></span>`;
+		}else{
+			html += `<span onclick="showPage('${title}', '${nowPage-1}', '${nowBlock}')"><i class="fa-solid fa-caret-left"></i></span>`;
+		}
+	}
+	for(let i = nowBlock*blockPerPage ; i < (nowBlock+1)*blockPerPage ; i++){
+		if(i === totalPage)break;
+		if(i === nowPage){
+			html += `<span class="pagination-now-page">${i+1}</span>`;
+		}else{
+			html += `<span onclick="showPage('${title}', '${i}', '${nowBlock}')">${i+1}</span>`;
+		}
+	}
+	//page
+	if(nowPage+1 === totalPage){
+		html += `<span><i class="fa-solid fa-caret-right"></i></span>`;
+	}else{
+		if((nowPage+1)%blockPerPage === 0){
+			html += `<span onclick="showPage('${title}', '${(nowBlock+1)*blockPerPage}', '${nowBlock+1}')"><i class="fa-solid fa-caret-right"></i></span>`;
+		}else{
+			html += `<span onclick="showPage('${title}', '${nowPage+1}', '${nowBlock}')"><i class="fa-solid fa-caret-right"></i></span>`;
+		}
+	}
+	//block
+	if(totalBlock === nowBlock+1){
+		html += `<span><i class="fa-solid fa-caret-right"></i><i class="fa-solid fa-caret-right"></i></span>`;
+	}else{
+		html += `<span onclick="showPage('${title}', '${(nowBlock+1)*blockPerPage}', '${nowBlock+1}')"><i class="fa-solid fa-caret-right"></i><i class="fa-solid fa-caret-right"></i></span>`;
+	}
+	myPaginationWrapper.innerHTML = html;
+}
+
+const showPage = (title, nowPage, nowBlock) => {
+	const scrollSection = document.querySelector('.scroll-img-data-reset');
+	if(scrollSection){
+		scrollSection.parentNode.removeChild(scrollSection);
+	}
+	fetchData(title, parseInt(nowPage), parseInt(nowBlock));
 }

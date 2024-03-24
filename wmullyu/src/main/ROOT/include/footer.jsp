@@ -2,8 +2,7 @@
 		</main>
 		<footer>
 			<section class="last-message">
-				<article class="pagination">
-					<span>1234567890</span>
+				<article class="my-pagination">
 				</article>
 				<article class="footer-msg">
 					<span>It is jium Office, which knows your mind the best.</span>
