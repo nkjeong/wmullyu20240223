@@ -28,15 +28,15 @@ public class ChangePassword extends HttpServlet {
         String userPw = changeRequest.getUserPw();
         String newPassword = changeRequest.getNewPassword();
         
-        System.out.println(userId);
-        System.out.println(userPw);
-        
         // 비밀번호 변경 로직 구현...
+        
+        ChangePasswordServlet cps = new ChangePasswordServlet();
+        String msg = cps.ckPassword(userId, userPw, newPassword);
         
         // 응답 JSON 구성 및 전송
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        mapper.writeValue(response.getWriter(), new SimpleResponse("Password changed successfully"));
+        mapper.writeValue(response.getWriter(), new SimpleResponse(msg));
     }
 
     // 간단한 응답 객체 예제

@@ -71,7 +71,7 @@
 						<section>
 							<article>비밀번호</article>
 							<article id="changeBtnWrapper">
-								<input type="password" name="userPw" class="userPw">
+								<input type="password" name="userPw" class="userPw" placeholder="비밀번호를 입력하세요">
 								<input type="password" name="newPassword" class="newPassword" placeholder="새로운 비밀번호를 입력하세요">
 								<input type="password" name="newPasswordRe" class="newPasswordRe" placeholder="다시한번 입력하세요">
 								<input type="button" value="비밀번호변경" class="changePwd">
