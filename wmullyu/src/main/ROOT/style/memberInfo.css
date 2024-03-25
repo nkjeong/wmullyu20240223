@@ -72,3 +72,23 @@
 	background-color: #eeeeee;
 	color:var(--bs-red);
 }
+#changeBtnWrapper{
+	display: flex;
+	align-items: center;
+}
+#changeBtnWrapper > input:first-child{
+	width:200px;
+}
+#changeBtnWrapper > input.newPassword,
+#changeBtnWrapper > input.newPasswordRe{
+	width:200px;
+	text-align: center;
+}
+#changeBtnWrapper > input:last-child{
+	margin:0 10px;
+	text-align:center;
+	width:100px;
+	height:80%;
+	border:1px solid #dcdcdc;
+	background-color: #f7f7f7;
+}
