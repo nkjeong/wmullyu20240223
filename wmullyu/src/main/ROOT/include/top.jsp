@@ -23,6 +23,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 		<link rel="stylesheet" href="/style/main.css">
 		<link rel="stylesheet" href="/style/mainLogged.css">
+		<link rel="stylesheet" href="/style/memberInfo.css">
 		<script>
 			async function getFetch(url) {
 			    try {
@@ -154,7 +155,7 @@
 					%>
 							<article>[<%=companyName%>] <%=userId%>님 환영합니다~</article>
 							<article>•</article>
-							<article>MEMBER</article>
+							<article><a class="h-top-a" href="/member/memberInfo.jsp">MEMBER</a></article>
 							<article>•</article>
 							<article><a class="h-top-a" href="/member/logout.jsp">LOGOUT</a></article>
 					<%	

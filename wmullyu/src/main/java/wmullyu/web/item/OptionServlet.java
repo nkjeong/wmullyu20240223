@@ -22,8 +22,12 @@ public class OptionServlet {
 			conn = getds.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			rs.next();
-			option = rs.getString("name") + " : " + rs.getString("optionValue");
+			if(rs.next()) {
+				option = rs.getString("name") + " : " + rs.getString("optionValue");
+			}else {
+				option = "err : err";
+			}
+			
 		}catch(SQLException e) {
 			System.out.println(e);
 		}finally {

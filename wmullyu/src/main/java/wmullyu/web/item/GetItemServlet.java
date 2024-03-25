@@ -110,6 +110,14 @@ public class GetItemServlet {
 				ib.setDiscontinued(rs.getString("discontinued"));
 				ib.setOutOfStock(rs.getString("outOfStock"));
 				ib.setOption(rs.getString("option"));
+				
+				if(ib.getOption().equals("Y")) {
+					OptionServlet os = new OptionServlet();
+					String option[] = os.getOption(ib.getCode(), ib.getManufacturingCompany_code()).split(":");
+					ib.setOptionName(option[0].trim());
+					ib.setOptionValue(option[1].trim());
+				}
+				
 				ib.setHit(rs.getInt("hit"));
 				ib.setNameEng(rs.getString("nameEng"));
 				ib.setNameKor(rs.getString("nameKor"));
