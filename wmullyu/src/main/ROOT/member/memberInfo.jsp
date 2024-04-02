@@ -139,7 +139,7 @@
 						</section>
 						<section>
 							<article>우편번호</article>
-							<article id="changeBtnWrapper"><input type="text" value="<%=companyZipcode%>" readonly><input type="button" value="주소변경" class="changeAddr"></article>
+							<article id="changeBtnWrapper"><input type="text" value="<%=companyZipcode%>" readonly><input type="button" value="주소변경" class="changeAddr" onclick="setAddr();"></article>
 						</section>
 						<section>
 							<article>주소</article>
@@ -149,6 +149,19 @@
 							<article>나머지주소</article>
 							<article><input type="text" value="<%=companyAddress_2%>"></article>
 						</section>
+						
+						<script>
+							function setAddr(){
+								new daum.Postcode({
+							        oncomplete: function(data) {
+							        	var roadAddr = data.roadAddress;
+							        	var zonecode = data.zonecode;
+							        	console.log(zonecode, roadAddr);
+							        }
+							    }).open();
+							}
+						</script>
+						
 						<section>
 							<article>등록일</article>
 							<article><input type="text" value="<%=registrationDate%>" readonly></article>
