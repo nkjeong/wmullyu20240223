@@ -1,107 +1,87 @@
 "use strict";
+let orderBy = 'registrationDate';
+let inOrder = 'DESC';
+// JavaScript 비동기 데이터 로딩 함수
+async function fetchData(title, nowPage=0, nowBlock=0) {
+    const mainLogged = mainSection.querySelector('.mainLogged');
+    const loadingMessage = document.getElementById('loadingMessage'); // 로딩 메시지 요소 선택
+    mainLogged.style.display = 'none';
+    loadingMessage.style.display = 'flex'; // 데이터 로딩 시작시 로딩 메시지 보이기
 
-async function fetchData(title, nowPage=0, nowBlock=0) {// 새로운 콘텐츠를 로드하는 로직
-	const mainLogged = mainSection.querySelector('.mainLogged');
-	mainLogged.style.display='none';
-	let data;
-	let setHTML = '';
-	if(title === 'all'){
-		title = '전체상품';
-	}else if(title === 'new'){
-		title = '최근등록상품(7일)';
-	}else if(title === 'outOfStock'){
-		title = '품절상품';
-	}else if(title === 'discontinued'){
-		title = '단종상품';
-	}
-	try {
-		data = await getFetch(`/item/itemExposureList?mode=${itemMode}&code=${modeCode}`);
-		// 임시로 새 콘텐츠를 페이지에 추가하는 예시
-		
-		const newContent = document.createElement('section');
-		setHTML = ``;
-				setHTML += `
-					<section class="item-exposure main-layout-width">
-						<section class="exposure-section">
-							<section class="exposure-title">
-								<article><span>${title}</span></article>
-							</section>
-							<section class="exposure-item-wrapper scroll-img-data">
-				`;
-		if(data.length === 0){
-			setHTML += `
-				검색된 데이터가 없습니다.
-			`;
-		}else{
-			
-			const totalItem = data.length;
-			const pagePerItem = 21;
-			const totalPage = Math.ceil(totalItem/pagePerItem);
-			const blockPerPage = 10;
-			const totalBlock = Math.ceil(totalPage/blockPerPage);
-			for(let i = nowPage*pagePerItem ; i < (nowPage+1)*pagePerItem ; i++){
-				if(i === totalItem)break;
-				let imgPre = data[i].nameEng.toLowerCase();
-				let imgName = `${imgPre}_${data[i].code}`;
-	            let itemName = data[i].item_name_reg;
-	            itemName = itemName.length > 25 ? itemName.substring(0, 25) + '...' : itemName;
-	            setHTML += `
-		            <section class="item-wrapper item-wrapper-scroll">
-		                <section class="item-img" data-itemdata='${JSON.stringify(data[i])}'>
-		                    <img src="https://www.wmullyu.co.kr/images/1000/${imgName}.jpg">
-		                </section>
-		                <section class="item-name">
-		                    ${itemName}
-		                </section>
-		                <section class="item-price">
-		                    <span style="text-decoration:line-through;">${getCurrentMony(data[i].item_retailPrice)}</span> -> <b style="color:#dc3545;">${getCurrentMony(data[i].item_purchasePrice)}</b>
-		                </section>
-		            </section>
-	
-				`;
-			}
-			
-			pagination(title, totalPage, blockPerPage, nowPage, nowBlock, totalBlock);
-			/*data.forEach((d)=>{
-	            let imgPre = d.nameEng.toLowerCase();
-	            let imgName = `${imgPre}_${d.code}`;
-	            let itemName = d.item_name_reg;
-	            itemName = itemName.length > 25 ? itemName.substring(0, 25) + '...' : itemName;
-				setHTML += `
-		            <section class="item-wrapper item-wrapper-scroll">
-		                <section class="item-img" data-itemdata='${JSON.stringify(d)}'>
-		                    <img src="https://www.wmullyu.co.kr/images/1000/${imgName}.jpg">
-		                </section>
-		                <section class="item-name">
-		                    ${itemName}
-		                </section>
-		                <section class="item-price">
-		                    <span style="text-decoration:line-through;">${getCurrentMony(d.item_retailPrice)}</span> -> <b style="color:#dc3545;">${getCurrentMony(d.item_purchasePrice)}</b>
-		                </section>
-		            </section>
-	
-				`;
-			});*/
-		}
-				setHTML += `
-					        </section>
-					    </section>
-					</section>
-				`;
-		newContent.classList.add('scroll-img-data-reset');
-		newContent.innerHTML = setHTML;
-		mainSection.appendChild(newContent);
+    let data;
+    let setHTML = '';
+    if (title === 'all') {
+        title = '전체상품';
+    } else if (title === 'new') {
+        title = '최근등록상품(7일)';
+    } else if (title === 'outOfStock') {
+        title = '품절상품';
+    } else if (title === 'discontinued') {
+        title = '단종상품';
+    }
+    
+    try {
+        data = await getFetch(`/item/itemExposureList?mode=${itemMode}&code=${modeCode}&orderBy=${orderBy}&inOrder=${inOrder}`);
+        const newContent = document.createElement('section');
+        setHTML = `
+            <section class="item-exposure main-layout-width">
+                <section class="exposure-section">
+                    <section class="exposure-title">
+                        <article><span>${title}</span></article>
+                    </section>
+                    <section class="exposure-item-wrapper scroll-img-data">
+        `;
+        if (data.length === 0) {
+            setHTML += `검색된 데이터가 없습니다.`;
+        } else {
+            const totalItem = data.length;
+            const pagePerItem = 21;
+            const totalPage = Math.ceil(totalItem/pagePerItem);
+            const blockPerPage = 10;
+            const totalBlock = Math.ceil(totalPage/blockPerPage);
+            
+            for (let i = nowPage*pagePerItem ; i < (nowPage+1)*pagePerItem ; i++) {
+                if (i >= totalItem) break;
+                let imgPre = data[i].nameEng.toLowerCase();
+                let imgName = `${imgPre}_${data[i].code}`;
+                let itemName = data[i].item_name_reg;
+                itemName = itemName.length > 25 ? itemName.substring(0, 25) + '...' : itemName;
+                setHTML += `
+                    <section class="item-wrapper item-wrapper-scroll">
+                        <section class="item-img" data-itemdata='${JSON.stringify(data[i])}'>
+                            <img src="https://www.wmullyu.co.kr/images/1000/${imgName}.jpg">
+                        </section>
+                        <section class="item-name">
+                            ${itemName}
+                        </section>
+                        <section class="item-price">
+                            <span style="text-decoration:line-through;">${getCurrentMony(data[i].item_retailPrice)}</span> -> <b style="color:#dc3545;">${getCurrentMony(data[i].item_purchasePrice)}</b>
+                        </section>
+                    </section>
+                `;
+            }
+            
+            pagination(title, totalPage, blockPerPage, nowPage, nowBlock, totalBlock);
+        }
+        setHTML += `</section></section></section>`;
+        newContent.classList.add('scroll-img-data-reset');
+        newContent.innerHTML = setHTML;
+        mainSection.appendChild(newContent);
+        loadingMessage.style.display = 'none'; // 데이터 로딩 완료 후 로딩 메시지 숨기기
+        
         const itemBtns = mainSection.querySelectorAll('.item-img');
-        itemBtns.forEach((btns)=>{
-			btns.addEventListener('click',(btn)=>{
-				const data = JSON.parse(btn.currentTarget.dataset.itemdata);
-				printData(data);//itemExposure.js
-			});
-		});
-	} catch (error) {
-		console.error('Error setting items:', error);
-	}
+        itemBtns.forEach((btns) => {
+            btns.addEventListener('click', (btn) => {
+                const data = JSON.parse(btn.currentTarget.dataset.itemdata);
+                printData(data); // printData 함수는 여기서 정의하지 않았으므로 추가 필요
+            });
+        });
+    } catch (error) {
+        console.error('Error setting items:', error);
+        loadingMessage.style.display = 'none'; // 에러 발생시 로딩 메시지 숨기기
+    }
 }
+
 
 const pagination = (title, totalPage, blockPerPage, nowPage, nowBlock, totalBlock) => {
 	const myPaginationWrapper = document.querySelector('.my-pagination');
@@ -159,12 +139,12 @@ const showPage = (title, nowPage, nowBlock) => {
 
 const downloadExcel = (downloadMode) => {
 	if(downloadMode === 'all'){
-		location.href = `/item/downloadExcel?mode=all&code=all`;
+		location.href = `/item/downloadExcel?mode=all&code=all&orderBy=${orderBy}&inOrder=${inOrder}`;
 	}else{
 		if(!itemMode || !modeCode){
 			alert('현재 페이지에서는 전체 데이터만 다운로드 가능합니다.');
 		}else{
-			location.href = `/item/downloadExcel?mode=${itemMode}&code=${modeCode}`;
+			location.href = `/item/downloadExcel?mode=${itemMode}&code=${modeCode}&orderBy=${orderBy}&inOrder=${inOrder}`;
 		}
 	}
 }

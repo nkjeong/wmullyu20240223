@@ -17,8 +17,10 @@ public class DownloadExcel extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mode = request.getParameter("mode");
 		String code = request.getParameter("code");
+		String orderBy = request.getParameter("orderBy");
+		String inOrder = request.getParameter("inOrder");
 		GetItemServlet gis = new GetItemServlet();
-		Vector<ItemBean> getList = gis.getItemList(mode, code);
+		Vector<ItemBean> getList = gis.getItemList(mode, code, orderBy, inOrder);
 		ServletContext application =  request.getServletContext();
 		application.setAttribute("getList", getList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/excelDownload/excelDownload.jsp");

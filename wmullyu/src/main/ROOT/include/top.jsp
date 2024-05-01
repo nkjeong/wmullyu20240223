@@ -49,6 +49,12 @@
 			  </div>
 			</div>
 		-->
+		<!-- HTML 로딩 메시지 요소 -->
+		<div id="loadingMessage" style="display:none; position: fixed; flex-direction:column; align-items:center; justify-content:center; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+		    <div>잠시만 기다려주세요...</div>
+		    <div style="font-size:2.5rem;"><i class="fa-solid fa-cloud-arrow-down fa-flip"></i></div>
+		</div>
+
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 		  <div class="offcanvas-header">
 		    <h5 id="offcanvasWithBothOptionsLabel"></h5>

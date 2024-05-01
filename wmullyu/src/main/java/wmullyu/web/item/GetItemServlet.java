@@ -12,7 +12,7 @@ import wmullyu.web.category.GetCategoryRandomCode;
 import wmullyu.web.dbConnection.ConnectionDB;
 
 public class GetItemServlet {
-	public Vector<ItemBean> getItemList(String mode, String code){
+	public Vector<ItemBean> getItemList(String mode, String code, String orderBy, String inOrder){
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -21,7 +21,7 @@ public class GetItemServlet {
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"
 					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
-					+ "ORDER BY g.`registrationDate` DESC";
+					+ "ORDER BY g.`"+orderBy+"` "+inOrder;
 		}else if(mode.equals("newReg")) {//메인페이지 최근등록 상품 노출
 			sql = "SELECT g.*, m.nameEng, m.nameKor \r\n"
 					+ "FROM goods AS g \r\n"
@@ -77,7 +77,7 @@ public class GetItemServlet {
 					+ "FROM goods AS g \r\n"
 					+ "LEFT JOIN manufacturingcompany AS m ON g.manufacturingCompany_code = m.code \r\n"
 					+ "WHERE g.`"+mode+"` = 'Y' \r\n"
-					+ "ORDER BY g.`registrationDate` DESC";
+					+ "ORDER BY g.`"+orderBy+"` DESC";
 		}
 		Vector<ItemBean> list = new Vector<ItemBean>();
 		try {

@@ -19,8 +19,10 @@ public class GetItemExposure extends HttpServlet {
 		String mode = request.getParameter("mode");
 		String code = request.getParameter("code");
 		String excel = request.getParameter("excel");
+		String orderBy = request.getParameter("orderBy");
+		String inOrder = request.getParameter("inOrder");
 		GetItemServlet gis = new GetItemServlet();
-		Vector<ItemBean> getList = gis.getItemList(mode, code);
+		Vector<ItemBean> getList = gis.getItemList(mode, code, orderBy, inOrder);
 		ServletContext application =  request.getServletContext();
 		application.setAttribute("getList", getList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/item/itemExposureList.jsp");
