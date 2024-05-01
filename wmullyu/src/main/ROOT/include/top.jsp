@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="/style/main.css">
 		<link rel="stylesheet" href="/style/mainLogged.css">
 		<link rel="stylesheet" href="/style/memberInfo.css">
+		<script src="https://kit.fontawesome.com/99f7b4874c.js" crossorigin="anonymous"></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
 			async function getFetch(url) {
